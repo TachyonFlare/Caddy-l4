@@ -36,14 +36,13 @@ jobs:
 
       - name: Build and push Docker image with tags
         run: |
-          IMAGE_BASE="ghcr.io/${{ github.repository_owner }}/caddy-layer4"
+          OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_BASE="ghcr.io/${OWNER_LOWER}/caddy-layer4"
           IMAGE_TAG="${{ github.ref_name }}"
           
-          # Build and tag image with current branch or tag name
           docker build -t $IMAGE_BASE:$IMAGE_TAG .
           docker push $IMAGE_BASE:$IMAGE_TAG
 
-          # If this is a push to main branch, also tag & push latest
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             docker tag $IMAGE_BASE:$IMAGE_TAG $IMAGE_BASE:latest
             docker push $IMAGE_BASE:latest
