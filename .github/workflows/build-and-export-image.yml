@@ -18,12 +18,3 @@ jobs:
 
       - name: 🔧 Build Docker image
         id: build
-        run: |
-          docker build -t caddy-layer4:local .
-          docker save caddy-layer4:local -o caddy-layer4.tar
-
-      - name: 📦 Upload Docker image artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: caddy-layer4-image
-          path: caddy-layer4.tar
