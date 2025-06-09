@@ -26,3 +26,8 @@ jobs:
         with:
           name: caddy-layer4-image
           path: caddy-layer4.tar
+      
+      - name: 🚀 Upload Docker image to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: caddy-layer4.tar
